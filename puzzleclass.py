@@ -55,7 +55,7 @@ class TologatosJatek:
             self.lepesek.append("le")
         self.lepesekszama += j
 
-    def jobbra(self, j):
+    def jobbra(self, j=1):
         #  j parameter jelenti, hogy hanszor ismeteljuk a jobbra mozgatast
         for _ in range(j):
             self.A[self.d[0][0]][self.d[0][1] + 1], self.A[self.d[0][0]][self.d[0][1]] = self.A[self.d[0][0]][
@@ -67,7 +67,7 @@ class TologatosJatek:
             self.lepesek.append("jobbra")
         self.lepesekszama += j
 
-    def balra(self, j):
+    def balra(self, j=1):
         #  j parameter jelenti, hogy hanszor ismeteljuk a balra mozgatast
         for _ in range(j):
             self.A[self.d[0][0]][self.d[0][1] - 1], self.A[self.d[0][0]][self.d[0][1]] = self.A[self.d[0][0]][
