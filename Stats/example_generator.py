@@ -5,10 +5,16 @@ import random
 def generate_start_position():
     elements = np.array(range(16))
     table = np.random.permutation(elements).reshape((4, 4))
+    example = TologatosJatek(table)
+    if example.megoldhatosag() == False:
+        if table[3][3] != 0:
+            table[3][3], table[3][2] = table[3][2], table[3][3]
+        else:
+            table[3][1], table[3][2] = table[3][2], table[3][1]
     return table
 
-def shuffle_position(org_table = "", num_of_shuffles = 100):
-    if org_table == "":
+def shuffle_position(org_table = "Default", num_of_shuffles = 100):
+    if type(org_table) == str:
         org_table = np.array(range(16))
         org_table = np.roll(org_table, -1)
         org_table.resize((4, 4))
