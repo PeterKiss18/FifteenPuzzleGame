@@ -4,6 +4,10 @@ class TologatosJatek:
     def __init__(self, tabla):
         #  A tabla egy 2 dimenzios 4x4-es meretu numpy array
         #  A tabla elemei 0-tol 15-ig a szamok ahol a 0 jelenti az ures mezot
+        if not isinstance(tabla, np.ndarray):
+            raise ValueError("Táblaként egy numpy.ndarray-t kell megadni")
+        elif tabla.shape != (4, 4):
+            tabla.resize((4, 4))
         self.A = tabla
         self.lepesek = []
         self.lepesekszama = 0
@@ -151,6 +155,8 @@ class TologatosJatek:
                 self.h(v[i], self.d[n])
 
     def kirakas(self):
+        if self.megoldhatosag() == False:
+            raise Exception("A tábla nem kirakható!")
         self.nullrendezes()
         self.fv(2, [0, 0])
         self.fv(3, [0, 1])
