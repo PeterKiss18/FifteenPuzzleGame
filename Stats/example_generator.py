@@ -7,10 +7,10 @@ def generate_start_position():
     table = np.random.permutation(elements).reshape((4, 4))
     example = TologatosJatek(table)
     if example.megoldhatosag() == False:
-        if table[3][3] != 0:
+        if table[3][3] != 0 and table[3][2] != 0:
             table[3][3], table[3][2] = table[3][2], table[3][3]
         else:
-            table[3][1], table[3][2] = table[3][2], table[3][1]
+            table[3][1], table[3][0] = table[3][0], table[3][1]
     return table
 
 def shuffle_position(org_table = "Default", num_of_shuffles = 100):
