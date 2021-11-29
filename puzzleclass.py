@@ -99,7 +99,8 @@ class TologatosJatek:
                 self.jobbra(j)
                 self.le(i)
 
-    def h(self, l, k):
+    def csere(self, l, k):
+        # az l és k szomszédos mezőkön álló számokat megcseréli
         x = l[0] - self.d[0][0]
         y = l[1] - self.d[0][1]
         if l[0] - k[0] == 0:
@@ -107,13 +108,13 @@ class TologatosJatek:
         if l[1] - k[1] == 0:
             self.kor(abs(x), abs(y), 1, 1)
 
-    def g(self, n, l):
-
+    def utvonal(self, n, l):
+        # az n számot tartalmazóó mezőből csinál egy utat az l mezőbe
         if l[1] - self.d[n][1] > 0:
             if self.d[n][0] < 3:
                 self.kor(3 - self.d[n][0], 3, l[1] - self.d[n][1], 1)
             if self.d[n][0] == 3:
-                self.kor(1, 3, l[1] + 1, 1)
+                self.kor(1, 3, self.d[n][1] + l[1] + 1, 1)
         x = l[0] - self.d[n][0]
         y = l[1] - self.d[n][1]
         v = []
@@ -149,33 +150,35 @@ class TologatosJatek:
         return v
 
     def fv(self, n, l):
-        v = self.g(n, l)
+        v = self.utvonal(n, l)
         if len(v) != 0:
             for i in range(len(v)):
-                self.h(v[i], self.d[n])
+                self.csere(v[i], self.d[n])
 
     def kirakas(self):
         if self.megoldhatosag() == False:
             raise Exception("A tábla nem kirakható!")
         self.nullrendezes()
-        self.fv(2, [0, 0])
-        self.fv(3, [0, 1])
-        self.fv(4, [0, 2])
-        if self.d[1] == [0, 3]:
+        if (self.A[0]==[1,2,3,4]).all()==False:
+            self.fv(2, [0, 0])
+            self.fv(3, [0, 1])
+            self.fv(4, [0, 2])
+            if self.d[1] == [0, 3]:
+                self.kor(3, 3, 1, 1)
+                self.kor(2, 3, 1, -1)
+                self.kor(3, 3, 1, -1)
+            self.fv(1, [1, 0])
             self.kor(3, 3, 1, 1)
-            self.kor(2, 3, 1, -1)
-            self.kor(2, 3, 1, -1)
-        self.fv(1, [1, 0])
-        self.kor(3, 3, 1, 1)
-        self.fv(6, [1, 0])
-        self.fv(7, [1, 1])
-        self.fv(8, [1, 2])
-        if self.d[5] == [1, 3]:
+        if (self.A[1]==[5,6,7,8]).all()==False:
+            self.fv(6, [1, 0])
+            self.fv(7, [1, 1])
+            self.fv(8, [1, 2])
+            if self.d[5] == [1, 3]:
+                self.kor(2, 3, 1, 1)
+                self.kor(1, 3, 1, -1)
+                self.kor(2, 3, 1, -1)
+            self.fv(5, [2, 0])
             self.kor(2, 3, 1, 1)
-            self.kor(1, 3, 1, -1)
-            self.kor(2, 3, 1, -1)
-        self.fv(5, [2, 0])
-        self.kor(2, 3, 1, 1)
         self.fv(13, [2, 0])
         if self.d[9] == [3, 0]:
             self.kor(1, 3, 3, 1)
@@ -185,7 +188,7 @@ class TologatosJatek:
             self.kor(1, 3, 2, 1)
         else:
             self.fv(9, [2, 1])
-            self.kor(1, 3, 6, 1)
+            self.kor(1, 3, 1, -1)
         self.fv(14, [2, 1])
         if self.d[10] == [3, 1]:
             self.kor(1, 2, 2, 1)
