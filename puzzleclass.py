@@ -179,26 +179,28 @@ class TologatosJatek:
                 self.kor(2, 3, 1, -1)
             self.fv(5, [2, 0])
             self.kor(2, 3, 1, 1)
-        self.fv(13, [2, 0])
-        if self.d[9] == [3, 0]:
-            self.kor(1, 3, 3, 1)
-            self.kor(1, 1, 1, -1)
-            self.kor(1, 3, 1, 1)
-            self.kor(1, 1, 2, -1)
-            self.kor(1, 3, 2, 1)
-        else:
-            self.fv(9, [2, 1])
-            self.kor(1, 3, 1, -1)
-        self.fv(14, [2, 1])
-        if self.d[10] == [3, 1]:
-            self.kor(1, 2, 2, 1)
-            self.kor(1, 1, 1, -1)
-            self.kor(1, 2, 1, 1)
-            self.kor(1, 1, 2, -1)
-            self.kor(1, 2, 1, 1)
-        else:
-            self.fv(10, [2, 2])
-            self.kor(1, 2, 4, 1)
+        if self.A[2][0] != 9 or self.A[3][0] != 13:
+            self.fv(13, [2, 0])
+            if self.d[9] == [3, 0]:
+                self.kor(1, 3, 3, 1)
+                self.kor(1, 1, 1, -1)
+                self.kor(1, 3, 1, 1)
+                self.kor(1, 1, 2, -1)
+                self.kor(1, 3, 2, 1)
+            else:
+                self.fv(9, [2, 1])
+                self.kor(1, 3, 6, 1)
+        if self.A[2][1] != 10 or self.A[3][1] != 14:
+            self.fv(14, [2, 1])
+            if self.d[10] == [3, 1]:
+                self.kor(1, 2, 2, 1)
+                self.kor(1, 1, 1, -1)
+                self.kor(1, 2, 1, 1)
+                self.kor(1, 1, 2, -1)
+                self.kor(1, 2, 1, 1)
+            else:
+                self.fv(10, [2, 2])
+                self.kor(1, 2, 4, 1)
         if self.d[11] == [3, 2]:
             self.kor(1, 1, 2, -1)
         if self.d[11] == [2, 3]:
