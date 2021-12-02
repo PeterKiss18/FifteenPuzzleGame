@@ -8,6 +8,13 @@ import time
 import math
 import numpy as np
 
+import pygame
+from pygame.locals import *
+import random
+import time
+import math
+import numpy as np
+
 """
 A scriptet futatva elindul a jatek
 A lépésekhez mind a billentyűzet nyilai, mind a mozgatni kívánt mezőre való kattintás lehetséges input
@@ -173,6 +180,7 @@ def kezdjük(kezdoallas):
             felulir = True
             if event.type == QUIT:
                 fut = False
+                pygame.quit()
             elif event.type == MOUSEBUTTONDOWN:
                 pozicio = pygame.mouse.get_pos()
                 if 20 <= pozicio[1] <= 80:
@@ -206,6 +214,7 @@ def kezdjük(kezdoallas):
                 nyilak = [K_LEFT, K_RIGHT, K_UP, K_DOWN]
                 if event.key == K_ESCAPE:
                     fut = False
+                    pygame.quit()
                 elif event.key in nyilak:
                     xy_tavolsag = [None, None]
 
@@ -228,12 +237,12 @@ def kezdjük(kezdoallas):
                                 gratulacio(400, 400)
 
                             break
-
-            ablak.fill(FEKETE, [100, 520, 400, 60])
-            if felulir:
-                lepesszamlalo("Lépéseid száma: " + str(lepesszam))
-            pygame.display.update()
-            clock.tick(60)
+            if fut != False:
+                ablak.fill(FEKETE, [100, 520, 400, 60])
+                if felulir:
+                    lepesszamlalo("Lépéseid száma: " + str(lepesszam))
+                pygame.display.update()
+                clock.tick(60)
 
 
 pygame.draw.rect(ablak, FEHER, (200, 250, 200, 100))
@@ -247,6 +256,7 @@ while fut:
     for event in pygame.event.get():
         if event.type == QUIT:
             fut = False
+            pygame.quit()
 
         elif event.type == MOUSEBUTTONDOWN:
             pozicio = pygame.mouse.get_pos()
