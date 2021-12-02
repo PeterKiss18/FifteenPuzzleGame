@@ -8,13 +8,6 @@ import time
 import math
 import numpy as np
 
-import pygame
-from pygame.locals import *
-import random
-import time
-import math
-import numpy as np
-
 """
 A scriptet futatva elindul a jatek
 A lépésekhez mind a billentyűzet nyilai, mind a mozgatni kívánt mezőre való kattintás lehetséges input
