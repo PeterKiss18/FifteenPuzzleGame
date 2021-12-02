@@ -7,6 +7,7 @@ import random
 import time
 import math
 import numpy as np
+import sys
 
 """
 A scriptet futatva elindul a jatek
@@ -61,9 +62,11 @@ class Mezo(object):
 
         for event in pygame.event.get(pygame.QUIT):
             pygame.quit()
+            sys.exit()
         for event in pygame.event.get(pygame.KEYDOWN):
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
+                sys.exit()
             pygame.event.post(event)
 
 
@@ -174,6 +177,7 @@ def kezdjük(kezdoallas):
             if event.type == QUIT:
                 fut = False
                 pygame.quit()
+                sys.exit()
             elif event.type == MOUSEBUTTONDOWN:
                 pozicio = pygame.mouse.get_pos()
                 if 20 <= pozicio[1] <= 80:
@@ -208,6 +212,7 @@ def kezdjük(kezdoallas):
                 if event.key == K_ESCAPE:
                     fut = False
                     pygame.quit()
+                    sys.exit()
                 elif event.key in nyilak:
                     xy_tavolsag = [None, None]
 
@@ -250,6 +255,7 @@ while fut:
         if event.type == QUIT:
             fut = False
             pygame.quit()
+            sys.exit()
 
         elif event.type == MOUSEBUTTONDOWN:
             pozicio = pygame.mouse.get_pos()
