@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class TologatosJatek:
     def __init__(self, tabla):
         #  A tabla egy 2 dimenzios 4x4-es meretu numpy array
@@ -17,16 +18,14 @@ class TologatosJatek:
                 self.d[self.A[i][j]] = [i, j]
 
     def megoldhatosag(self):
-        inv=0
-        for i in range(1,16):
-            if self.A[int((i-i%4)/4)][i%4] == 0:
-                pass
-            else:
+        inv = 0
+        for i in range(1, 16):
+            if not self.A[int((i - i % 4) / 4)][i % 4] == 0:
                 for j in range(i):
-                    if self.A[int((j-j%4)/4)][j%4] == 0:
+                    if self.A[int((j - j % 4) / 4)][j % 4] == 0:
                         pass
-                    elif self.A[int((i-i%4)/4)][i%4] < self.A[int((j-j%4)/4)][j%4]:
-                        inv=inv+1
+                    elif self.A[int((i - i % 4) / 4)][i % 4] < self.A[int((j - j % 4) / 4)][j % 4]:
+                        inv = inv + 1
         inv += self.d[0][0]
         if inv % 2 == 0:
             return False
@@ -34,9 +33,9 @@ class TologatosJatek:
             return True
 
     def nullrendezes(self):
-        [k,l] = self.d[0]
-        self.le(3-k)
-        self.jobbra(3-l)
+        [k, l] = self.d[0]
+        self.le(3 - k)
+        self.jobbra(3 - l)
 
     def fel(self, j=1):
         #  j parameter jelenti, hogy hanszor ismeteljuk a felfele mozgatast
@@ -159,7 +158,7 @@ class TologatosJatek:
         if self.megoldhatosag() == False:
             raise Exception("A tábla nem kirakható!")
         self.nullrendezes()
-        if (self.A[0]==[1,2,3,4]).all()==False:
+        if (self.A[0] == [1, 2, 3, 4]).all() == False:
             self.fv(2, [0, 0])
             self.fv(3, [0, 1])
             self.fv(4, [0, 2])
@@ -169,7 +168,7 @@ class TologatosJatek:
                 self.kor(3, 3, 1, -1)
             self.fv(1, [1, 0])
             self.kor(3, 3, 1, 1)
-        if (self.A[1]==[5,6,7,8]).all()==False:
+        if (self.A[1] == [5, 6, 7, 8]).all() == False:
             self.fv(6, [1, 0])
             self.fv(7, [1, 1])
             self.fv(8, [1, 2])
