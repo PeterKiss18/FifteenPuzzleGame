@@ -10,7 +10,7 @@ class TologatosJatek:
         elif tabla.shape != (4, 4):
             tabla.resize((4, 4))
         self.A = tabla
-        self.lepesek = []
+        self.lepesek = []  # ebbe a listaba mentem el a megtett lepeseket
         self.lepesekszama = 0
         self.d = {}  # d egy dictionary ahol minden szamhoz feljegyezzuk hogy hol szerepel a tablaban
         for i in range(4):
@@ -18,6 +18,10 @@ class TologatosJatek:
                 self.d[self.A[i][j]] = [i, j]
 
     def megoldhatosag(self):
+        """
+        Ez metodus eldonti, hogy kirakhato-e az aktualis allas
+        :return: True ha kirakhato a tabla es False ha nem
+        """
         inv = 0
         for i in range(1, 16):
             if not self.A[int((i - i % 4) / 4)][i % 4] == 0:
@@ -33,6 +37,9 @@ class TologatosJatek:
             return True
 
     def nullrendezes(self):
+        """
+        Ez a metodus leviszi a 0-t a jobb also sarokba
+        """
         [k, l] = self.d[0]
         self.le(3 - k)
         self.jobbra(3 - l)
@@ -83,8 +90,13 @@ class TologatosJatek:
         self.lepesekszama += j
 
     def kor(self, i, j, k, e):
-        #  k: forgatasok szama
-        #  e: forgatas iranya
+        """
+        Egy teglalap menten korbe forgatja az ures mezot
+        :param i: teglalap magassaga
+        :param j: teglalap szelessege
+        :param k: forgatasok szama
+        :param e: forgatas iranya, 1 ha pozitiv a forgasirany es 0 ha negativ
+        """
         if e > 0:
             for _ in range(k):
                 self.fel(i)
@@ -108,7 +120,7 @@ class TologatosJatek:
             self.kor(abs(x), abs(y), 1, 1)
 
     def utvonal(self, n, l):
-        # az n számot tartalmazóó mezőből csinál egy utat az l mezőbe
+        # az n számot tartalmazó mezőből csinál egy utat az l mezőbe
         if l[1] - self.d[n][1] > 0:
             if self.d[n][0] < 3:
                 self.kor(3 - self.d[n][0], 3, l[1] - self.d[n][1], 1)
@@ -149,6 +161,11 @@ class TologatosJatek:
         return v
 
     def fv(self, n, l):
+        """
+        Az n szamot elviszi az l koordinataju mezobe
+        :param n: 0 es 15 kozotti egesz szam
+        :param l: 2 elemu lista, ahol az elso koordinata a sor, a masodik az oszlop sorszamat jeloli
+        """
         v = self.utvonal(n, l)
         if len(v) != 0:
             for i in range(len(v)):
