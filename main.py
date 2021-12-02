@@ -8,6 +8,15 @@ import time
 import math
 import numpy as np
 
+"""
+A scriptet futatva elindul a jatek
+A lépésekhez mind a billentyűzet nyilai, mind a mozgatni kívánt mezőre való kattintás lehetséges input
+Az új gomb megnyomására egy új táblát kapunk véletlenszerűen
+A megold gomb megnyomására az algoritmus kirakja a táblát
+A visszaállít gomb megnyomására az általunk megtett lépéseket visszavonja és kezdhetjük újra ugyanazt a táblát
+"""
+
+# szín változók beállítása RGB kódjuk szerint
 PIROS = (255, 0, 0)
 FEHER = (255, 255, 255)
 FEKETE = (0, 0, 0)
@@ -30,11 +39,11 @@ class Mezo(object):
         self.magassag = 99
 
     def rajzol(self):
-        pygame.draw.rect(ablak, PIROS, (self.x, self.y, self.szelesseg, self.magassag),0)
+        pygame.draw.rect(ablak, PIROS, (self.x, self.y, self.szelesseg, self.magassag), 0)
         # téglalapot rajzol: az ablakra,szín, méretezés(honnan,mekkora), szegély
         szoveg = font.render(str(self.szam), True, FEHER)  # a saját számát kiírja (true-->lekerekített számok)
         szövegdoboz = szoveg.get_rect(center=((2 * self.x + self.szelesseg) / 2, (
-                    2 * self.y + self.magassag) / 2))  # középre rakja a szöveget a négyzeten belül
+                2 * self.y + self.magassag) / 2))  # középre rakja a szöveget a négyzeten belül
         ablak.blit(szoveg, szövegdoboz)  # a ablak-re kirajzolja a szögeget a szövegdobozba
 
     def mozgat(self, tavolsag):  # téglalap mozgatása
@@ -42,9 +51,9 @@ class Mezo(object):
         hova_y = self.y + tavolsag[1]
 
         while self.x != hova_x or self.y != hova_y:  # amíg nincs ott
-            ablak.fill(FEHER, [self.x, self.y, 99, 99])  # az jelenlegi helyét fehérre kitöltjük
+            ablak.fill(FEHER, [self.x, self.y, 99, 99])  # a jelenlegi helyét fehérre kitöltjük
             self.x += int(tavolsag[0] / 20)  # odébbrakjuk, majd lerajzoljuk
-            self.y += int(tavolsag[1] / 20)
+            self.y += int(tavolsag[1] / 20)  # 20 jelentése, hogy 20 db képkockából áll össze a mozgás
             self.rajzol()
             pygame.display.update()
             # frissítjük a képernyőt
@@ -56,6 +65,7 @@ class Mezo(object):
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
             pygame.event.post(event)
+
 
 def lepesszamlalo(jelenlegilepeszam):
     szoveg = font.render(jelenlegilepeszam, True, FEHER)
@@ -74,7 +84,7 @@ def gratulacio(üres_x, üres_y):
 
 nyero_allas = [[100, 100, 1], [200, 100, 2], [300, 100, 3], [400, 100, 4], [100, 200, 5], [200, 200, 6], [300, 200, 7],
                [400, 200, 8], [100, 300, 9], [200, 300, 10], [300, 300, 11], [400, 300, 12], [100, 400, 13],
-               [200, 400, 14], [300, 400, 15]]
+               [200, 400, 14], [300, 400, 15]]  # ha ezt az állást elérjük akkor nyertünk
 
 
 def nyeroallas(allas):
