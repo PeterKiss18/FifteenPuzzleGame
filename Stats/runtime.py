@@ -16,7 +16,7 @@ generate_end_time = time.time()
 print(str(num_of_iters), "db kezdőállás legenerálásához szükséges idő:",
       round(generate_end_time - generate_start_time, 5), "s")
 
-games = [TologatosJatek(generate_start_position()) for _ in range(num_of_iters)]  # Letrehozok
+games = [TologatosJatek(generate_start_position()) for _ in range(num_of_iters)]  # Letrehozom a lejatszando jatekokat
 alg_start_time = time.time()
 for game in games:
     game.kirakas()
